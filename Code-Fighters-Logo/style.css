@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.logo {
+  position: relative;
+  transform: rotateZ(45deg)
+
+}
+
+.logo-text {
+    position: absolute;
+  font-size: 2.5rem;
+  font-weight: bold;
+  font-style: italic;
+  color: #585353;
+  top: 40px;
+  left: -20px;
+  /* text-transform: uppercase; */
+  letter-spacing: 2px;
+  width: auto; /* Sabit bir genişlik ayarlayın */
+  transform: rotate(-45deg); /* Yatayda 0 derece döndürün */
+
+  /* -webkit-background-clip: text; */
+  letter-spacing: 5px;
+  -webkit-text-stroke: 2px rgb(135, 143, 41);
+  
+}
+.span{
+  font-size: 1rem;
+
+}
+
+.logo::after {
+  content: "";
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  right: -10px;
+  bottom: -10px;
+  background-image: url("./img/logo.jpg");
+  width: 250px;
+  height: 250px;
+  background-size: cover;
+  border-radius: 5%;
+  z-index: -1;
+}
