@@ -56,13 +56,6 @@ kaydet.addEventListener("click", () => {
       createTable();
     }
   }
-  harcamaObject = {
-    tarih: document.querySelector("#tarih").value,
-    harcama: document.querySelector("#harcama").value,
-    aciklama: document.querySelector("#harcama-aciklama-input").value,
-    id: new Date().getTime(),
-  };
-  harcamaListesi.push(harcamaObject);
   // localStorage.setItem("Harcamalar", JSON.stringify(harcamaListesi));
   // console.log(harcamaListesi);
   hesaplaGuncelle();
@@ -110,11 +103,19 @@ function createTable() {
   tbContent = document.createTextNode(harcama);
   tbCell.appendChild(tbContent);
 
+  harcamaObject = {
+    tarih: document.querySelector("#tarih").value,
+    harcama: document.querySelector("#harcama").value,
+    aciklama: document.querySelector("#harcama-aciklama-input").value,
+    id: new Date().getTime(),
+  };
+  harcamaListesi.push(harcamaObject);
+
   const createLastTd = () => {
     const td = document.createElement("td");
     td.classList.add("delete");
     td.textContent = "🗑";
-    td.setAttribute("id", harcamaObject.id);
+    td.id = harcamaObject.id;
     td.setAttribute("type", "button");
     td.style = "border:none; cursor:pointer";
     // td.append(td.textContent);
@@ -149,11 +150,19 @@ function updateTableBody(tableElement) {
   tbContent = document.createTextNode(harcama);
   tbCell.appendChild(tbContent);
 
+  harcamaObject = {
+    tarih: document.querySelector("#tarih").value,
+    harcama: document.querySelector("#harcama").value,
+    aciklama: document.querySelector("#harcama-aciklama-input").value,
+    id: new Date().getTime(),
+  };
+  harcamaListesi.push(harcamaObject);
+
   const createLastTd = () => {
     const td = document.createElement("td");
     td.textContent = "🗑";
     td.classList.add("delete");
-    td.setAttribute("id", harcamaObject.id);
+    td.id = harcamaObject.id;
     td.setAttribute("type", "button");
     td.style = "border:none; cursor:pointer";
     // td.append(td.textContent);
