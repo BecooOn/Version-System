@@ -1,6 +1,7 @@
 const kaydet = document.querySelector(".btn-kaydet");
 const ekle = document.querySelector(".btn-ekle");
 const temizle = document.querySelector(".btn-temizle");
+const gelir = document.querySelector("#gelir");
 
 //! Tarih değerini sayfanın yüklenmesi ile birlikte ekranda görmek için
 window.addEventListener("load", () => {
@@ -15,8 +16,9 @@ temizle.addEventListener("click", () => {
     document.querySelector("#harcama").value = "";
     document.querySelector("#harcama-aciklama-input").value = "";
     document.querySelector("#gelir").value = "";
+    document.querySelector(".sonuc-gelir").textContent = "";
     document.querySelector(".tablo-formu").firstElementChild.remove();
-    document.querySelector(".hasilat").firstElementChild.remove();
+    // document.querySelector(".hasilat").firstElementChild.remove();
   }
 });
 
@@ -47,6 +49,7 @@ kaydet.addEventListener("click", () => {
       createTable();
     }
   }
+  totalExpense();
 });
 
 function createTable() {
@@ -121,44 +124,62 @@ function updateTableBody(tableElement) {
   tbCell.appendChild(tbContent);
 }
 
-//!Geliri eklemek için
-ekle.addEventListener("click", () => {
-  // const gelir = document.querySelector('#gelir').value;
+function totalExpense() {
+  let giderler = document.querySelector("#harcama").value;
+  document.querySelector(".sonuc-gider").textContent += Number(giderler); //!!concatinate yapıyor
+}
 
-  const tableElement = document.querySelector(".table");
-  // Eğer tablo varsa sadece tbody içeriğini güncellemek için
-  if (tableElement) {
-    if (document.querySelector("#gelir").value === "") {
-      alert("Lütfen bu alanları doldurunuz");
-    } else {
-      // tbody içeriğini güncellemek için
-      updateTableBodyTotal(tableElement);
-    }
+//? Gelir eklemek için
+let toplamGelir = 0;
+ekle.addEventListener("click", () => {
+  if (document.querySelector("#gelir").value === "") {
+    alert("Lütfen bu alanları doldurunuz");
   } else {
-    if (document.querySelector("#gelir").value === "") {
-      alert("Lütfen bu alanları doldurunuz");
-    } else {
-      // Tablo yoksa yeni bir tablo oluşturmak için
-      createTableTotal();
-    }
+    toplamGelir += Number(gelir.value);
+    document.querySelector(".sonuc-gelir").textContent = toplamGelir;
+    // console.log(toplamGelir);
   }
+  gelir.value = "";
+  // localStorage.setItem("gelir", toplamGelir);
+  // localStorage.clear();
 });
 
-function updateTableBodyTotal(tableElement) {
-  const tbody = tableElement.querySelector("tbody");
-  let gelir = document.querySelector("#gelir").value;
-  const tbRow = tbody.insertRow();
-  let tbCell = tbRow.insertCell();
-  let tbContent = document.createTextNode(gelir);
-  tbCell.appendChild(tbContent);
-}
+//!Geliri eklemek için
+// ekle.addEventListener("click", () => {
+//   // const gelir = document.querySelector('#gelir').value;
 
-function createTableTotal(){
-    const hasilatTablo = document.createElement("table");
-    hasilatTablo.classList.add("hasilat-table");
+//   const tableElement = document.querySelector(".table");
+//   // Eğer tablo varsa sadece tbody içeriğini güncellemek için
+//   if (tableElement) {
+//     if (document.querySelector("#gelir").value === "") {
+//       alert("Lütfen bu alanları doldurunuz");
+//     } else {
+//       // tbody içeriğini güncellemek için
+//       updateTableBodyTotal(tableElement);
+//     }
+//   } else {
+//     if (document.querySelector("#gelir").value === "") {
+//       alert("Lütfen bu alanları doldurunuz");
+//     } else {
+//       // Tablo yoksa yeni bir tablo oluşturmak için
+//       createTableTotal();
+//     }
+//   }
+// });
 
+// function updateTableBodyTotal(tableElement) {
+//   const tbody = tableElement.querySelector("tbody");
+//   let gelir = document.querySelector("#gelir").value;
+//   const tbRow = tbody.insertRow();
+//   let tbCell = tbRow.insertCell();
+//   let tbContent = document.createTextNode(gelir);
+//   tbCell.appendChild(tbContent);
+// }
 
+// function createTableTotal(){
+//     const hasilatTablo = document.createElement("table");
+//     hasilatTablo.classList.add("hasilat-table");
+//     const hasilatRow = hasilatTablo.insertRow();
 
-
-    document.querySelector(".hasilat").appendChild(hasilatTablo);
-}
+//     document.querySelector(".hasilat").appendChild(hasilatTablo);
+// }
