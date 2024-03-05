@@ -2,12 +2,17 @@ const kaydet = document.querySelector(".btn-kaydet");
 const ekle = document.querySelector(".btn-ekle");
 const temizle = document.querySelector(".btn-temizle");
 const gelir = document.querySelector("#gelir");
-
-//! Tarih değerini sayfanın yüklenmesi ile birlikte ekranda görmek için
-window.addEventListener("load", () => {
-  // document.querySelector("#tarih").value = new Date().toISOString().split('T')[0];  // Tarihi alıp inputa yazdırıyoruz. Birinci yol
-  document.querySelector("#tarih").valueAsDate = new Date(); // Tarihi alıp inputa yazdırıyoruz. İkinci yol
-});
+const giderler = document.querySelector("#harcama");
+const aciklama = document.querySelector("#harcama-aciklama-input");
+const sonucGelir = document.querySelector(".sonuc-gelir");
+const sonucGider = document.querySelector(".sonuc-gider");
+const sonucKalan = document.querySelector(".sonuc-kalan");
+const tabloFormu = document.querySelector(".tablo-formu");
+let toplamGelir = 0;
+let toplamGiderler = 0;
+let kalan = 0;
+let harcamaListesi = [];
+let harcamaObject = {};
 
 //!Tümünü silmek için
 temizle.addEventListener("click", () => {
@@ -16,7 +21,9 @@ temizle.addEventListener("click", () => {
     document.querySelector("#harcama").value = "";
     document.querySelector("#harcama-aciklama-input").value = "";
     document.querySelector("#gelir").value = "";
-    document.querySelector(".sonuc-gelir").textContent = "";
+    document.querySelector(".sonuc-gelir").textContent = "0";
+    document.querySelector(".sonuc-gider").textContent = "0";
+    document.querySelector(".sonuc-kalan").textContent = "0";
     document.querySelector(".tablo-formu").firstElementChild.remove();
     // document.querySelector(".hasilat").firstElementChild.remove();
   }
@@ -49,7 +56,19 @@ kaydet.addEventListener("click", () => {
       createTable();
     }
   }
-  totalExpense();
+  harcamaObject = {
+    tarih: document.querySelector("#tarih").value,
+    harcama: document.querySelector("#harcama").value,
+    aciklama: document.querySelector("#harcama-aciklama-input").value,
+    id: new Date().getTime(),
+  };
+  harcamaListesi.push(harcamaObject);
+  // localStorage.setItem("Harcamalar", JSON.stringify(harcamaListesi));
+  // console.log(harcamaListesi);
+  hesaplaGuncelle();
+
+  document.querySelector("#harcama").value = "";
+  document.querySelector("#harcama-aciklama-input").value = "";
 });
 
 function createTable() {
@@ -71,6 +90,7 @@ function createTable() {
 
   // Tablo gövdesi (tbody) oluştur
   const tbody = document.createElement("tbody");
+  tbody.classList.add("table-tbody");
 
   // Satır oluşturmak ve verileri hücrelere eklemek için
   const tbRow = tbody.insertRow();
@@ -90,9 +110,19 @@ function createTable() {
   tbContent = document.createTextNode(harcama);
   tbCell.appendChild(tbContent);
 
+  const createLastTd = () => {
+    const td = document.createElement("td");
+    td.classList.add("delete");
+    td.textContent = "🗑";
+    td.setAttribute("id", harcamaObject.id);
+    td.setAttribute("type", "button");
+    td.style = "border:none; cursor:pointer";
+    // td.append(td.textContent);
+    return td;
+  };
+
   tbCell = tbRow.insertCell();
-  tbContent = document.createTextNode("🗑");
-  tbCell.appendChild(tbContent);
+  tbCell.appendChild(createLastTd());
 
   // Tablo formuna eklemek için
   formTablo.appendChild(tbody);
@@ -119,67 +149,81 @@ function updateTableBody(tableElement) {
   tbContent = document.createTextNode(harcama);
   tbCell.appendChild(tbContent);
 
-  tbCell = tbRow.insertCell();
-  tbContent = document.createTextNode("🗑");
-  tbCell.appendChild(tbContent);
-}
+  const createLastTd = () => {
+    const td = document.createElement("td");
+    td.textContent = "🗑";
+    td.classList.add("delete");
+    td.setAttribute("id", harcamaObject.id);
+    td.setAttribute("type", "button");
+    td.style = "border:none; cursor:pointer";
+    // td.append(td.textContent);
+    return td;
+  };
 
-function totalExpense() {
-  let giderler = document.querySelector("#harcama").value;
-  document.querySelector(".sonuc-gider").textContent += Number(giderler); //!!concatinate yapıyor
+  tbCell = tbRow.insertCell();
+  tbCell.appendChild(createLastTd());
 }
 
 //? Gelir eklemek için
-let toplamGelir = 0;
 ekle.addEventListener("click", () => {
   if (document.querySelector("#gelir").value === "") {
     alert("Lütfen bu alanları doldurunuz");
   } else {
     toplamGelir += Number(gelir.value);
-    document.querySelector(".sonuc-gelir").textContent = toplamGelir;
     // console.log(toplamGelir);
   }
+  hesaplaGuncelle();
   gelir.value = "";
   // localStorage.setItem("gelir", toplamGelir);
   // localStorage.clear();
 });
 
-//!Geliri eklemek için
-// ekle.addEventListener("click", () => {
-//   // const gelir = document.querySelector('#gelir').value;
+const hesaplaGuncelle = () => {
+  const giderlerToplami = harcamaListesi.reduce(
+    (toplam, harcama) => toplam + Number(harcama.harcama),
+    0
+  );
+  document.querySelector(".sonuc-gelir").textContent = toplamGelir;
+  document.querySelector(".sonuc-gider").textContent = giderlerToplami;
+  sonucKalan.textContent = toplamGelir - giderlerToplami;
+  // console.log(giderTolami);
+};
 
-//   const tableElement = document.querySelector(".table");
-//   // Eğer tablo varsa sadece tbody içeriğini güncellemek için
-//   if (tableElement) {
-//     if (document.querySelector("#gelir").value === "") {
-//       alert("Lütfen bu alanları doldurunuz");
-//     } else {
-//       // tbody içeriğini güncellemek için
-//       updateTableBodyTotal(tableElement);
-//     }
-//   } else {
-//     if (document.querySelector("#gelir").value === "") {
-//       alert("Lütfen bu alanları doldurunuz");
-//     } else {
-//       // Tablo yoksa yeni bir tablo oluşturmak için
-//       createTableTotal();
-//     }
-//   }
-// });
+tabloFormu.addEventListener("click", (e) => {
+  // const tableElement = document.querySelector(".table");
+  if (e.target.classList.contains("delete")) {
+    e.target.parentElement.parentElement.remove();
+    const itemId = parseInt(e.target.id);
+    harcamaListesi = harcamaListesi.filter((harcama) => harcama.id !== itemId);
+    hesaplaGuncelle();
 
-// function updateTableBodyTotal(tableElement) {
-//   const tbody = tableElement.querySelector("tbody");
-//   let gelir = document.querySelector("#gelir").value;
-//   const tbRow = tbody.insertRow();
-//   let tbCell = tbRow.insertCell();
-//   let tbContent = document.createTextNode(gelir);
-//   tbCell.appendChild(tbContent);
-// }
+    // console.log(harcamaListesi);
+    // localStorage.setItem("harcamaListesi", JSON.stringify(harcamaListesi));
+  }
+  //  else if(e.target.classList.contains("delete") && harcamaListesi.length === 1){
+  //   sonucKalan.textContent = toplamGelir;
+  //   console.log(harcamaListesi.length);
+  // }
+});
 
-// function createTableTotal(){
-//     const hasilatTablo = document.createElement("table");
-//     hasilatTablo.classList.add("hasilat-table");
-//     const hasilatRow = hasilatTablo.insertRow();
+//! Tarih değerini sayfanın yüklenmesi ile birlikte ekranda görmek için
+window.addEventListener("load", () => {
+  hesaplaGuncelle();
+  // document.querySelector("#tarih").value = new Date().toISOString().split('T')[0];  // Tarihi alıp inputa yazdırıyoruz. Birinci yol
+  document.querySelector("#tarih").valueAsDate = new Date(); // Tarihi alıp inputa yazdırıyoruz. İkinci yol
 
-//     document.querySelector(".hasilat").appendChild(hasilatTablo);
-// }
+  // harcamaListesi = JSON.parse(localStorage.getItem("harcamaListesi")) || []; // Verileri local storage'dan çekiyoruz. Local storage'da yoksa bos bir dizi oluşturuyoruz.
+  // harcamaListesi.forEach((harcama) => {
+  // createTableBody(harcama);
+  // topluHesaplama(harcama);
+  // })
+
+  toplamGelir = localStorage.getItem("gelirler") || 0;
+  sonucGelir.textContent = toplamGelir;
+
+  toplamGiderler = localStorage.getItem("giderler") || 0;
+  sonucGider.textContent = toplamGiderler;
+
+  kalan = localStorage.getItem("kalan") || 0;
+  sonucKalan.textContent = kalan;
+});

@@ -29,7 +29,7 @@
             type="number"
             name=""
             id="harcama"
-            placeholder="Harcanan para(₺)"
+            placeholder="Harcanan para(₺)" autofocus min="0" required
           />
         </div>
 
@@ -39,7 +39,7 @@
             type="text"
             name=""
             id="harcama-aciklama-input"
-            placeholder="Harcama Açıklaması"
+            placeholder="Harcama Açıklaması" required
           />
         </div>
 
@@ -49,7 +49,7 @@
       </div>
 
       <div class="gelir-formu">
-        <input type="number" name="" id="gelir" placeholder="Geliriniz(₺)"/>
+        <input type="number" name="" id="gelir" placeholder="Geliriniz(₺)" min="0" autofocus required/>
         <button class="btn-ekle">Ekle</button>
       </div>
 
@@ -68,7 +68,7 @@
       </div>
 
       <div class="hasilat">
-        <!-- <table class="hasilat-table">
+        <table class="hasilat-table">
           <tr class="hasilat-table-gelir">
             <td>Geliriniz:</td>
             <td class="sonuc-gelir"></td>
@@ -81,7 +81,7 @@
             <td>Kalan:</td>
             <td class="sonuc-kalan"></td>
           </tr>
-        </table> -->
+        </table>
       </div>
 
       <div class="temizle">
