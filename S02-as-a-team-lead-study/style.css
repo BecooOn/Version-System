@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Anta&display=swap");
+.anta-regular {
+  font-family: "Anta", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: black;
+  font-family: "Anta", sans-serif;
+}
+body {
+    background-color: rgb(176, 181, 214);
+
+  width: 100vw;
+  height: 100vh;
+}
+
+header {
+  display: flex;
+  background-color: rgb(176, 181, 214);
+  text-align: center;
+  align-items: center;
+  height: 15%;
+}
+.headerPart{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* flex-wrap: wrap; */
+    gap: 1rem;
+}
+.contributers{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+main {
+  color: white;
+  height: 60vh;
+}
+
+.section {
+  margin: 0 auto;
+  width: 80%;
+  height: 100%;
+  background-color: lightgray;
+  /* border: 1px solid #000; */
+  text-align: center;
+  padding: 20px;
+  transition: opacity 0.5s ease-in-out;
+}
+.questions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  height: 100%;
+}
+
+.buttons {
+  margin-top: 10px;
+}
+
+#isim {
+  margin-top: 10px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: blue;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  text-align: center;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 15;
+}
+
+.modal-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 320px;
+  padding: 1rem;
+  /* margin: auto; */
+  overflow: hidden;
+  position: relative;
+}
+
+@media screen and (max-width: 600px) {
+  .page {
+    width: 10px;
+    height: 30px;
+    font-size: 0.8rem;
+    padding-right: 13px;
+  }
+  main {
+    height: 55vh;
+  }
+}

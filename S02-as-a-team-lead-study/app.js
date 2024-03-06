@@ -4,6 +4,8 @@ const isim = document.querySelector(".isim");
 const imgSrc = document.querySelector("#img-src");
 const count = document.querySelector(".count");
 const countDown = document.querySelector("#countDown");
+const modal = document.getElementById("myModal");
+
 let arr = [
   "QA124-ALİ MERT",
   "QB129-VEYSEL",
@@ -45,7 +47,8 @@ const imgObj = {
 let interval;
 btn.addEventListener("click", () => {
   clearInterval(interval);
-  let startTime = new Date().getTime();
+  modal.style.display = "flex";
+//   let startTime = new Date().getTime();
   interval = setInterval(() => {
     let index = Math.floor(Math.random() * arr.length);
     isim.textContent = arr[index];
@@ -53,6 +56,7 @@ btn.addEventListener("click", () => {
     let resimURL = imgObj[kod];
     imgSrc.src = resimURL;
   }, 100);
+
   setTimeout(() => {
     clearInterval(interval);
     let finalIndex = Math.floor(Math.random() * arr.length);
@@ -61,28 +65,18 @@ btn.addEventListener("click", () => {
     let resimURL = imgObj[kod];
     imgSrc.src = resimURL;
     arr = arr.filter((item) => item !== arr[finalIndex]);
-      if (arr.length == 0) {
-        imgSrc.src = "";
-        isim.style.display = "none";
-        img.style.display = "none";
-        btn.style.display = "none";
-        count.style.display = "block";
-        countDown.style.display = "block";
-      }
+
+    if (arr.length == 0) {
+      imgSrc.src = "";
+      isim.style.display = "none";
+      img.style.display = "none";
+    //   btn.style.display = "none";
+    //   count.style.display = "block";
+    //   countDown.style.display = "block";
+    }
     console.log(arr);
   }, 2000);
+  setTimeout(() => {
+    modal.style.display = "none";
+  }, 4000)
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
