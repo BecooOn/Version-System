@@ -151,6 +151,54 @@ main {
   overflow: hidden;
   position: relative;
 }
+@media screen and (max-width: 992px){
+  .page {
+    width: 10px;
+    height: 30px;
+    font-size: 0.8rem;
+    padding-right: 13px;
+  }
+  main {
+    height: 55vh;
+  }
+  .section {
+    width: 100%;
+  }
+  #home {
+    width: 100%;
+  }
+  .modal-content-video video {
+    width: 500px;
+  }
+  .questions,
+  .options {
+    font-size: 1.5rem;
+    line-height: 1.4rem;
+  }
+  .solution {
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  #soru12img,
+  #soru17img {
+    width: 400px;
+    height: 100px;
+  }
+  #soru17imgA,
+  #soru17imgB,
+  #soru17imgC,
+  #soru17imgD {
+    /* display: inline-block; */
+    height: 120px;
+    width: 250px;
+    padding-top: 1rem;
+  }
+}
+}
 
 @media screen and (max-width: 600px) {
   .page {
@@ -163,6 +211,9 @@ main {
     height: 55vh;
   }
   .section {
+    width: 100%;
+  }
+  #home {
     width: 100%;
   }
   .modal-content-video video {
