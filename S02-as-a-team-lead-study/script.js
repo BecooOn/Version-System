@@ -3,7 +3,7 @@ const sections = document.querySelectorAll(".section");
 const buttons = document.querySelectorAll(".btn");
 const previous = document.getElementById("previous");
 const next = document.getElementById("next");
-const check = document.getElementById("check");
+const check = document.querySelectorAll("#check");
 const solutions = document.querySelectorAll(".solution");
 const questions = document.querySelectorAll(".question");
 const btnSound = document.querySelector("#btnSound");
@@ -65,8 +65,11 @@ function showQuestion(questionNumber) {
 
 //! --------------------CHECK BUTTON-------------------
 
-check.addEventListener("click", () => {
-  showSolution(currentIndex);
+check.forEach((checkBtn, index) => {
+  checkBtn.addEventListener("click", () => {
+    showSolution(index + 1);
+    btnSound.play();
+  });
 });
 function showSolution(solutionNumber) {
   solutions.forEach((solution) => {
@@ -74,9 +77,6 @@ function showSolution(solutionNumber) {
   });
   const selectedSolution = document.getElementById("solution" + solutionNumber);
   if (selectedSolution) {
-    selectedSolution.style.display = "block"; // Çözümü göster
-    selectedSolution.style.gridArea = "1 / 2 / 2 / 3"; // Çözümü belirli bir alan içine yerleştir (örneğin, 1. satır, 2. sütun)
-    // Soruyu belirli bir alana yerleştir (örneğin, 1. satır, 1. sütun)
-    selectedSolution.previousElementSibling.style.gridArea = "1 / 1 / 2 / 2";
+    selectedSolution.style.display = "block";
   }
 }
