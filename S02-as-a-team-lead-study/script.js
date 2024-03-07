@@ -1,5 +1,4 @@
 const home = document.getElementById("home");
-// const random = document.getElementById("random");
 const sections = document.querySelectorAll(".section");
 const previous = document.getElementById("previous");
 const next = document.getElementById("next");
@@ -10,10 +9,9 @@ function pageBtnClick(currentIndex) {
   questions.forEach((question, index) => {
     if (index + 1 === currentIndex) {
       question.style.display = "block";
-    } 
-    // else {
-    //   question.style.display = "none";
-    // }
+    } else {
+      question.style.display = "none";
+    }
   });
 }
 
@@ -24,14 +22,13 @@ buttons.forEach((button, index) => {
   });
 });
 
-
 //! --------------------NEXT-PREVİOUS BUTTONS-------------------
 let currentIndex = 1; // Doğru değerle başlatıldı
 
 previous.addEventListener("click", () => {
   if (currentIndex > 1) {
     showQuestion(currentIndex - 1); // currentIndex azaltıldı
-    currentIndex--;
+    // currentIndex--;
   } else {
     showQuestion(1);
   }
@@ -40,16 +37,11 @@ previous.addEventListener("click", () => {
 next.addEventListener("click", () => {
   if (currentIndex < 21) {
     showQuestion(currentIndex + 1);
-    currentIndex++;
+    // currentIndex++;
   } else {
     showQuestion(21);
   }
 });
-
-// random.addEventListener("click", () => {
-//     const randomIndex = Math.floor(Math.random() * buttons.length) + 1;
-//     showQuestion(randomIndex);
-// });
 
 function showQuestion(questionNumber) {
   sections.forEach((section) => {
@@ -59,4 +51,5 @@ function showQuestion(questionNumber) {
   if (selectedQs) {
     selectedQs.style.display = "block";
   }
+  currentIndex = questionNumber; // previous ve next butonları ile senkronize sağlamak için
 }
