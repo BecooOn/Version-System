@@ -5,6 +5,9 @@ const imgSrc = document.querySelector("#img-src");
 const count = document.querySelector(".count");
 const countDown = document.querySelector("#countDown");
 const modal = document.getElementById("myModal");
+const modalVideo = document.querySelector(".modalVideo");
+const spinSound = document.getElementById("spin");
+const videoBtn = document.querySelector("#videoBtn");
 
 let arr = [
   "QA124-ALİ MERT",
@@ -48,7 +51,7 @@ let interval;
 btn.addEventListener("click", () => {
   clearInterval(interval);
   modal.style.display = "flex";
-//   let startTime = new Date().getTime();
+  //   let startTime = new Date().getTime();
   interval = setInterval(() => {
     let index = Math.floor(Math.random() * arr.length);
     isim.textContent = arr[index];
@@ -70,13 +73,23 @@ btn.addEventListener("click", () => {
       imgSrc.src = "";
       isim.style.display = "none";
       img.style.display = "none";
-    //   btn.style.display = "none";
-    //   count.style.display = "block";
-    //   countDown.style.display = "block";
+      //   btn.style.display = "none";
+      //   count.style.display = "block";
+      //   countDown.style.display = "block";
     }
     console.log(arr);
   }, 2000);
   setTimeout(() => {
     modal.style.display = "none";
-  }, 4000)
+  }, 4000);
+  spinSound.play();
+});
+
+//!video için
+videoBtn.addEventListener("click", () => {
+  modalVideo.style.display = "flex";
+  document.querySelector("#introVideo").play();
+  setTimeout(() => {
+    modalVideo.style.display = "none";
+  }, 16500);
 });
