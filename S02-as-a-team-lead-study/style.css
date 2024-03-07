@@ -151,4 +151,29 @@ main {
   main {
     height: 55vh;
   }
+  .section{
+    width: 100%;
+  }
+  .modal-content-video video {
+    width: 300px;
+  }
+  .questions,
+  .options {
+    font-size: 0.7rem;
+    line-height: 1rem;
+  }
+  .solution {
+    display: flex;
+    align-items: center;
+    font-size: 0.7rem;
+  }
+  h2 {
+    font-size: 1rem;
+  }
+  #soru12img,#soru17img{
+    width: 280px;
+  }
+  #soru17imgA,#soru17imgB,#soru17imgC,#soru17imgD{
+    width: 110px;
+  }
 }

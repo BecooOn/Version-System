@@ -27,7 +27,7 @@ buttons.forEach((button, index) => {
 });
 
 //! --------------------NEXT-PREVİOUS BUTTONS-------------------
-let currentIndex = 1; // Doğru değerle başlatıldı
+let currentIndex = 0; // Doğru değerle başlatıldı
 
 previous.addEventListener("click", () => {
   if (currentIndex > 1) {
@@ -35,6 +35,7 @@ previous.addEventListener("click", () => {
     // currentIndex--;
   } else {
     showQuestion(1);
+    currentIndex = 1;
   }
   btnSound.play();
 });

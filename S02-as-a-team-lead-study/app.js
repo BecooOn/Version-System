@@ -27,6 +27,7 @@ let arr = [
   "Q5187-MUSTAFA",
   "QA175-CEREN",
   "QC101-ZAFER",
+  "QA158-ADEM"
 ];
 const imgObj = {
   QA124: "https://ca.slack-edge.com/T06BXPTNG1H-U06BZMJ6NRG-dccbd667afa4-512",
@@ -46,6 +47,7 @@ const imgObj = {
   Q5187: "https://ca.slack-edge.com/T06BXPTNG1H-U06BPTAS2R5-e3d695199afa-512",
   QA175: "./img/QA175.jpg",
   QC101: "./img/QC101.jpg",
+  QA158:"https://ca.slack-edge.com/T06BXPTNG1H-U06C0S2BFGB-32c50024b778-192"
 };
 let interval;
 btn.addEventListener("click", () => {
