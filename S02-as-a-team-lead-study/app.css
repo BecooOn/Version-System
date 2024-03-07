@@ -16,7 +16,7 @@
   object-fit: contain;
 }
 .isim {
-  border: 2px solid orange;
+  /* border: 2px solid orange; */
   width: 300px;
   height: 3rem;
   display: flex;

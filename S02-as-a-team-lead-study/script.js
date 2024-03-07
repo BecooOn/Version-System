@@ -7,13 +7,14 @@ const next = document.getElementById("next");
 //! ---------------------SAYFA BUTON----------------------
 function pageBtnClick(currentIndex) {
   const questions = document.querySelectorAll(".question");
-  questions.forEach((question) => {
-    question.style.display = "none";
+  questions.forEach((question, index) => {
+    if (index + 1 === currentIndex) {
+      question.style.display = "block";
+    } 
+    // else {
+    //   question.style.display = "none";
+    // }
   });
-  const selectedQuestion = document.getElementById(`question${currentIndex}`);
-  if (selectedQuestion) {
-    selectedQuestion.style.display = "block";
-  }
 }
 
 const buttons = document.querySelectorAll(".btn");
@@ -22,6 +23,7 @@ buttons.forEach((button, index) => {
     pageBtnClick(index + 1);
   });
 });
+
 
 //! --------------------NEXT-PREVİOUS BUTTONS-------------------
 let currentIndex = 1; // Doğru değerle başlatıldı
@@ -36,7 +38,7 @@ previous.addEventListener("click", () => {
 });
 
 next.addEventListener("click", () => {
-  if (currentIndex < buttons.length) {
+  if (currentIndex < 21) {
     showQuestion(currentIndex + 1);
     currentIndex++;
   } else {
