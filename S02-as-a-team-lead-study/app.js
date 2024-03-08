@@ -2,8 +2,8 @@ const btn = document.querySelector("#btn");
 const img = document.querySelector(".img");
 const isim = document.querySelector(".isim");
 const imgSrc = document.querySelector("#img-src");
-const count = document.querySelector(".count");
-const countDown = document.querySelector("#countDown");
+// const count = document.querySelector(".count");
+// const countDown = document.querySelector("#countDown");
 const modal = document.getElementById("myModal");
 const modalVideo = document.querySelector(".modalVideo");
 const spinSound = document.getElementById("spin");
@@ -72,9 +72,11 @@ btn.addEventListener("click", () => {
     arr = arr.filter((item) => item !== arr[finalIndex]);
 
     if (arr.length == 0) {
+      modal.style.display = "none";
       imgSrc.src = "";
       isim.style.display = "none";
       img.style.display = "none";
+      btn.style.display = "none";
       //   btn.style.display = "none";
       //   count.style.display = "block";
       //   countDown.style.display = "block";
