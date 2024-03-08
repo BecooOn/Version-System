@@ -59,6 +59,7 @@ main {
   background-image: url(./audio/bgGif.gif);
   /* background-repeat: no-repeat; */
   background-size: cover;
+  -webkit-mask: linear-gradient(90deg, #0000, #000 10% 90%, #0000);
 }
 
 .section {
@@ -149,14 +150,20 @@ main {
   padding: 1rem;
   /* margin: auto; */
   overflow: hidden;
-  position: relative;
+  /* position: relative; */
 }
-@media screen and (max-width: 992px){
+#introVideo {
+  width: 1200px;
+}
+@media screen and (max-width: 992px) {
   .page {
     width: 10px;
     height: 30px;
     font-size: 0.8rem;
     padding-right: 13px;
+  }
+  #introVideo {
+    width: 750px;
   }
   main {
     height: 55vh;
@@ -205,6 +212,9 @@ main {
     height: 30px;
     font-size: 0.8rem;
     padding-right: 13px;
+  }
+  #introVideo {
+    width: 350px;
   }
   main {
     height: 55vh;

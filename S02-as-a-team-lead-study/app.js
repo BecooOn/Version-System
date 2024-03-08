@@ -95,5 +95,5 @@ videoBtn.addEventListener("click", () => {
     modalVideo.style.display = "none";
     document.getElementById("home").style.display = "none";
     document.getElementById("question1").style.display = "block";
-  }, 16500);
+  }, 57000);
 });
