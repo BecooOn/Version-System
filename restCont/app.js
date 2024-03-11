@@ -4,7 +4,7 @@ const nameSpan = document.querySelector(".nameSpan");
 const capitalSpan = document.querySelector(".capitalSpan");
 const populationSpan = document.querySelector(".populationSpan");
 const regionSpan = document.querySelector(".regionSpan");
-// const btn = document.querySelector(".btn");
+const show = document.querySelector(".show");
 
 const getCountry = async () => {
   try {
@@ -22,7 +22,10 @@ const getCountry = async () => {
     document.querySelector("body").appendChild(img);
   }
 };
+let countryData;
 const countryFunc = (country) => {
+  country.sort((a, b) => a.name.common.localeCompare(b.name.common));
+  countryData = country;
   country.map((item) => {
     const option = document.createElement("option");
     option.value = item.name.common;
@@ -30,15 +33,22 @@ const countryFunc = (country) => {
     countries.append(option);
   });
 };
+const displayCountryInfo = (selectedCountry) => {
+  flag.setAttribute("src", selectedCountry.flags.png);
+  nameSpan.textContent = `${selectedCountry.name.common}`;
+  capitalSpan.textContent = `${selectedCountry.capital}`;
+  populationSpan.textContent = `${selectedCountry.population}`;
+  regionSpan.textContent = `${selectedCountry.region}`;
+  countries.style.display = "block";
+  show.style.display = "flex";
+};
 
 getCountry();
 
-// let randomNumber = Math.floor(Math.random() * country.length);
-// const selectedCountry = country[randomNumber];
-// // console.log(selectedCountry);
-// flag.setAttribute("src", selectedCountry.flags.png);
-// nameSpan.textContent = `${selectedCountry.name.common}`;
-// capitalSpan.textContent = `Capital: ${selectedCountry.capital}`;
-// populationSpan.textContent = `Population: ${selectedCountry.population}`;
-// regionSpan.textContent = `Region: ${selectedCountry.region}`;
-// countries.style.display = "block";
+countries.addEventListener("change",() => {
+  const selectedCountryName = countries.value;
+  const selectedCountry = countryData.find(
+    (item) => item.name.common === selectedCountryName
+  );
+  displayCountryInfo(selectedCountry);
+});
