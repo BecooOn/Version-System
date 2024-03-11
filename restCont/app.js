@@ -4,6 +4,7 @@ const nameSpan = document.querySelector(".nameSpan");
 const capitalSpan = document.querySelector(".capitalSpan");
 const populationSpan = document.querySelector(".populationSpan");
 const regionSpan = document.querySelector(".regionSpan");
+const google = document.querySelector("#mapConnect");
 const show = document.querySelector(".show");
 
 const getCountry = async () => {
@@ -39,6 +40,7 @@ const displayCountryInfo = (selectedCountry) => {
   capitalSpan.textContent = `${selectedCountry.capital}`;
   populationSpan.textContent = `${selectedCountry.population}`;
   regionSpan.textContent = `${selectedCountry.region}`;
+  google.setAttribute("href", selectedCountry.maps.googleMaps);
   countries.style.display = "block";
   show.style.display = "flex";
 };
